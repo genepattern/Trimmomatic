@@ -1,47 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Ant build file -->
-
 <project basedir="." default="create-zip" name="Trimmomatic">
-    <property name="java.target" value="1.6" />
-	<property name="dirOffset" value="../" />
-	<import file="${dirOffset}/commontargets.xml" />
-
-    <target name="_init" depends="init">
-        <property name="appfile" value="IlluminaFastqTrimmer.jar" />
-        <property name="inclds" value="org/" />
-        <path id="library.classpath">
-            <fileset id="jar.files" dir="lib" includes="*.jar" />
-        </path>
-    </target>
-
-    <target name="package" depends="_init, clean, compile">
-        <mkdir dir="dist" />
-        <jar destfile="dist/${appfile}" basedir="classes" update="true" defaultexcludes="true">
-            <fileset dir="." excludes="**/*.java" includes="${inclds}" />
-            <manifest>
-                <attribute name="Main-Class" value="org.genepattern.module.trimmomatic.illuminaFastqTrimmer.IlluminaFastqTrimmer" />
-                <attribute name="Class-Path" value="IlluminaFastqTrimmer.jar commons-io-1.4.jar commons-lang3-3.3.1.jar jopt-simple-3.3.jar trimmomatic-0.32.jar" />
-            </manifest>
-        </jar>
-    </target>
-
-    <target name="clean">
-        <delete>
-            <fileset dir="." includes="**/*.class, *.jar" />
-        </delete>
-    </target>
-
-    <target name="compile" depends="_init">
-        <mkdir dir="classes" />
-        <javac debug="true" defaultexcludes="true" 
-            deprecation="true" destdir="classes" includes="${inclds}" optimize="false" proceed="false" srcdir="src" target="${java.target}" source="${java.target}">
-            <classpath refid="library.classpath" />
-        </javac>
-    </target>
-
-    <target depends="clean,compile" name="build" />
-
-    <target depends="_init, package" name="create-zip">
+    <property name="dirOffset" value="../common_module_code" />
+    <import file="${dirOffset}/commontargets.xml" />
+    <target name="create-zip" depends="init">
         <antcall target="prezip" />
         <zip destfile="${dest.dir}/${ant.project.name}.zip" whenempty="fail" defaultexcludes="true">
             <fileset dir="." includes="*.html, manifest, paramgroups.json" />
