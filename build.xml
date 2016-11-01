@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="." default="create-zip" name="Trimmomatic">
-    <property name="dirOffset" value="../common_module_code" />
-    <import file="${dirOffset}/commontargets.xml" />
-    <target name="create-zip" depends="init">
+<!-- Ant build file -->
+
+<project basedir="" default="package" name="Trimmomatic">
+    <property name="dirOffset" value="../common_module_code"/>
+    <import file="${dirOffset}/commontargets.xml"/>
+
+    <target name="_init" depends="init">
+        <property name="appfile" value="Preprocess.jar"/>
+        <property  name="inclds" value="edu/"/>
+        <path id="library.classpath">
+            <fileset id="jar.lib" dir="lib" includes="*.jar">
+            </fileset>
+        </path>
+    </target>
+
+
+    <target name="package" depends="_init, clean, compile">
+        <jar basedir="." defaultexcludes="true" excludes="**/*.java, **/*.form, **/.nbattrs" includes="${inclds}" jarfile="${appfile}"></jar>
+    </target>
+
+    <target name="clean">
+        <delete>
+            <fileset dir="." includes="**/*.class"/>
+        </delete>
+    </target>
+
+    <target name="compile" depends="_init">
+        <javac debug="true" defaultexcludes="true" deprecation="true" destdir="." includes="${inclds}" optimize="false" proceed="false" srcdir="src">
+            <classpath refid="library.classpath"/>
+        </javac>
+    </target>
+    
+   
+
+    <target depends="clean,compile" name="build"/>
+
+    <target depends="_init, package" name="create-zip">
         <antcall target="prezip" />
         <zip destfile="${dest.dir}/${ant.project.name}.zip" whenempty="fail" defaultexcludes="true">
             <fileset dir="." includes="*.html, manifest, paramgroups.json" />
@@ -11,4 +44,5 @@
         </zip>
         <antcall target="postzip" />
     </target>
+
 </project>
