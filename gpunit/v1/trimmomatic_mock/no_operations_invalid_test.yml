@@ -1,0 +1,15 @@
+#
+# Mock test: Invalid, no operations specified
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    phred.encoding: "phred33"
+    # Must have at least one operation in order to avoid Exception in building cmdline.log
+assertions:
+    jobStatus: fail
+    files:
+        "stderr.txt":
+            diffCmd: ../diffFirstLineOnly.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/no_operations_invalid_test/stderr.txt

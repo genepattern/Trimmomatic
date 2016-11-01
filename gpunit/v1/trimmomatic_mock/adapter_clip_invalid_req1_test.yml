@@ -1,0 +1,15 @@
+#
+# Mock test: Testing adapter.clip missing first 2 req. params: invalid
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    adapter.clip.palindrome.clip.threshold: "30"
+    adapter.clip.simple.clip.threshold: "10"
+assertions:
+    jobStatus: fail
+    files:
+        "stderr.txt":
+            diffCmd: ../diffFirstLineOnly.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/adapter_clip_invalid_req1_test/stderr.txt

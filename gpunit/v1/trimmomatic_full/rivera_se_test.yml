@@ -1,0 +1,25 @@
+#
+# Real data test: single-ended data from Diego's GenomeSpace recipe
+#
+module: Trimmomatic
+params: 
+    input.file.1: "real/s.cerevisiae_mutant.fastq.bz2"
+    output.filename.base: "<input.file.1_basename>"
+    adapter.clip.sequence.file: "ftp://gpftp.broadinstitute.org/module_support_files/Trimmomatic_0.32/adapters/TruSeq3-SE.fa"
+    adapter.clip.seed.mismatches: "2"
+    adapter.clip.palindrome.clip.threshold: "30"
+    adapter.clip.simple.clip.threshold: "10"
+    trim.leading.quality.threshold: "3"
+    trim.trailing.quality.threshold: "3"
+    sliding.window.size: "4"
+    sliding.window.quality.threshold: "15"
+    min.read.length: "36"
+assertions:
+    jobStatus: success
+    files:
+        "cmdline.log":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_full/rivera_se_test/cmdline.log
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_full/rivera_se_test/stdout.txt

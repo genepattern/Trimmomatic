@@ -1,0 +1,14 @@
+#
+# Mock test: Testing max.info.strictness param: invalid, req. max.info.target.length
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    max.info.strictness: "0.5"
+assertions:
+    jobStatus: fail
+    files:
+        "stderr.txt":
+            diffCmd: ../diffFirstLineOnly.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/max_info_strict_invalid_req_trgt_len_test/stderr.txt

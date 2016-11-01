@@ -1,0 +1,15 @@
+#
+# Mock test: Testing max.info.strictness param: invalid, under range min
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    max.info.target.length: "3"
+    max.info.strictness: "-1.5"
+assertions:
+    jobStatus: fail
+    files:
+        "stderr.txt":
+            diffCmd: ../diffFirstLineOnly.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/max_info_strict_invalid_under_range_test/stderr.txt

@@ -1,0 +1,19 @@
+#
+# Mock test: Testing max.info params: 3, 0.5 (valid)
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    max.info.target.length: "3"
+    max.info.strictness: "0.5"
+assertions:
+    files:
+        "mock_readsSE_trimmed.fastq":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/max_info_valid_test/mock_readsSE_trimmed.fastq
+        "cmdline.log":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/max_info_valid_test/cmdline.log
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTracesAndSkip.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/max_info_valid_test/stdout.txt

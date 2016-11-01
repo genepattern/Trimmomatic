@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="run_tests" name="gpunit_runner">
+    <property name="dirOffset" value = "../../.." />
+    <property name="gpunit.dir" value="${dirOffset}/util/gp-unit" />
+    <property file="gpunit.properties" />
+    <target name="run_tests">
+        <ant antfile="${dirOffset}/util/gp-unit/build.xml" target="gpunit" />
+    </target>
+    
+    <target name="clean">
+        <delete dir="test_runs" file="System.out" />
+    </target>
+</project>

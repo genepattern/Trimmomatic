@@ -1,0 +1,20 @@
+#
+# Mock test: Testing extra.steps param: valid operations
+# Testing convert.phred.scores blank value option as well
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    convert.phred.scores: ""
+    extra.steps: " CROP:17 HEADCROP:4"
+assertions:
+    files:
+        "mock_readsSE_trimmed.fastq":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/extra_steps_valid_test/mock_readsSE_trimmed.fastq
+        "cmdline.log":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/extra_steps_valid_test/cmdline.log
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTracesAndSkip.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/extra_steps_valid_test/stdout.txt

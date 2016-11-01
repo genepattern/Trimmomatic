@@ -1,0 +1,13 @@
+#
+# Mock test: Testing sliding.window.quality.threshold param: invalid, req. sliding.window.size
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    sliding.window.quality.threshold: "15"
+assertions:
+    jobStatus: fail
+    files:
+        "stderr.txt":
+            diffCmd: ../diffFirstLineOnly.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/sliding_window_qual_thresh_invalid_req_size_test/stderr.txt

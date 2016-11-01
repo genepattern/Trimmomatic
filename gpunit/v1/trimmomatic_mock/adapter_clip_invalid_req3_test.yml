@@ -1,0 +1,15 @@
+#
+# Mock test: Testing adapter.clip missing all req. params, but specifies optional: invalid
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    adapter.clip.min.length: "1"
+    adapter.clip.keep.both.reads: "yes"
+assertions:
+    jobStatus: fail
+    files:
+        "stderr.txt":
+            diffCmd: ../diffFirstLineOnly.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/adapter_clip_invalid_req3_test/stderr.txt

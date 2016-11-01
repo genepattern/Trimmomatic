@@ -1,0 +1,19 @@
+#
+# Mock test: Testing adapter.clip.palindrome.clip.threshold param: invalid
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    adapter.clip.sequence.file: "ftp://gpftp.broadinstitute.org/module_support_files/Trimmomatic_0.32/adapters/TruSeq3-SE.fa"
+    adapter.clip.seed.mismatches: "2"
+    adapter.clip.palindrome.clip.threshold: "invalid"
+    adapter.clip.simple.clip.threshold: "10"
+    adapter.clip.min.length: "1"
+    adapter.clip.keep.both.reads: "yes"
+assertions:
+    jobStatus: fail
+    files:
+        "stderr.txt":
+            diffCmd: ../diffFirstLineOnly.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/adapter_clip_pal_clip_thresh_invalid_test/stderr.txt

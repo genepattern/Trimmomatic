@@ -1,0 +1,19 @@
+#
+# Mock test: Testing a bz2-compressed SE input file with "fq" extension
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fq.bz2"
+    output.filename.base: "<input.file.1_basename>"
+    # Must have at least one operation in order to avoid Exception in building cmdline.log
+    convert.phred.scores: "to_phred33"
+assertions:
+    files:
+        "mock_readsSE_trimmed.fq.gz":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/se_fq_bz2_test/mock_readsSE_trimmed.fq.gz
+        "cmdline.log":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/se_fq_bz2_test/cmdline.log
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTracesAndSkip.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/se_fq_bz2_test/stdout.txt

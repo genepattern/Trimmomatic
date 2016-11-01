@@ -1,0 +1,8 @@
+[{name: "Basic Input Parameters and Options", description: "These parameters are used to input files and set up any trimming operation.", parameters: ["input.file.1", "input.file.2", "output.filename.base", "phred.encoding", "create.trimlog", "convert.phred.scores"]}, 
+{name: "Adapter Clipping", hidden: true, parameters: ["adapter.clip.sequence.file", "adapter.clip.seed.mismatches", "adapter.clip.palindrome.clip.threshold", "adapter.clip.simple.clip.threshold", "adapter.clip.min.length", "adapter.clip.keep.both.reads"]},
+{name: "Trim Leading", hidden: true, parameters: ["trim.leading.quality.threshold"]},
+{name: "Trim Trailing", hidden: true, parameters: ["trim.trailing.quality.threshold"]},
+{name: "Max Info", hidden: true, parameters: ["max.info.target.length", "max.info.strictness"]},
+{name: "Sliding Window", hidden: true, parameters: ["sliding.window.size", "sliding.window.quality.threshold"]},
+{name: "Min Read Length", hidden: true, parameters: ["min.read.length"]},
+{name: "Extra Steps", hidden: true, parameters: ["extra.steps"]}]

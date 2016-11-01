@@ -1,0 +1,178 @@
+name=Trimmomatic
+commandLine=<java> <java_flags> -jar <libdir>IlluminaFastqTrimmer.jar --threads=4 --input.file.1=<input.file.1> <input.file.2> --output.filename.base=<output.filename.base> --create.trimlog=<create.trimlog> --phred.encoding=<phred.encoding> <convert.phred.scores> <adapter.clip.sequence.file> <adapter.clip.seed.mismatches> <adapter.clip.palindrome.clip.threshold> <adapter.clip.simple.clip.threshold> <adapter.clip.min.length> <adapter.clip.keep.both.reads> <trim.leading.quality.threshold> <trim.trailing.quality.threshold> <max.info.target.length> <max.info.strictness> <sliding.window.size> <sliding.window.quality.threshold> <min.read.length> <extra.steps>
+license=
+taskDoc=doc.html
+fileFormat=fq;fastq
+taskType=RNA-seq
+categories=RNA-seq;Preprocess & Utilities
+quality=pre-production
+os=any
+privacy=public
+description=Provides a variety of options for trimming Illumina FASTQ files of adapter sequences and low-quality reads.
+version=
+minGenePatternVersion=
+author=Anthony Bolger et al, Usadel Lab, Rheinsch - Westfalische Technische Hochschule Aachen 
+
+p1_MODE=IN
+p1_TYPE=FILE
+p1_default_value=
+p1_description=The input FASTQ to be trimmed.  For paired-end data, this should be the forward ("*_1" or "left") input file.
+p1_fileFormat=fq;fastq;fq.gz;fastq.gz;fq.bz2;fastq.bz2
+p1_name=input.file.1
+p1_optional=
+p1_prefix_when_specified=
+p1_type=java.io.File
+p1_value=
+
+p2_MODE=IN
+p2_TYPE=FILE
+p2_default_value=
+p2_description=The reverse ("*_2" or "right") input FASTQ of paired-end data to be trimmed.
+p2_fileFormat=fq;fastq;fq.gz;fastq.gz;fq.bz2;fastq.bz2
+p2_name=input.file.2
+p2_optional=on
+p2_prefix_when_specified=--input.file.2=
+p2_type=java.io.File
+p2_value=
+
+p3_default_value=<input.file.1_basename>
+p3_description=A base name to be used for the output files.
+p3_name=output.filename.base
+p3_optional=
+p3_prefix_when_specified=
+p3_type=java.lang.String
+
+p4_MODE=IN
+p4_TYPE=FILE
+p4_choiceDir=ftp\://gpftp.broadinstitute.org/module_support_files/Trimmomatic_0.32/adapters
+p4_choiceDirFilter=*.fa;*.fasta;*.FA;*.FASTA
+p4_default_value=
+p4_description=A FASTA file containing the adapter sequences, PCR sequences, etc. to be clipped. This parameter is required to enable adapter clipping. Files are provided for several Illumina pipelines but you can also provide your own; see the documentation for details. Be sure to choose a PE file for paired-end data and an SE file for single-end data.
+p4_fileFormat=fa;fasta
+p4_name=adapter.clip.sequence.file
+p4_optional=on
+p4_prefix_when_specified=--adapter.clip.sequence.file=
+p4_type=java.io.File
+p4_value=
+
+p5_default_value=
+p5_description=Specifies the maximum mismatch count which will still allow a full match to be performed. A value of 2 is recommended. This parameter is required to enable adapter clipping.
+p5_name=adapter.clip.seed.mismatches
+p5_optional=on
+p5_prefix_when_specified=--adapter.clip.seed.mismatches=
+p5_type=java.lang.Integer
+
+p6_default_value=
+p6_description=Specifies how accurate the match between the two 'adapter ligated' reads must be for PE palindrome read alignment. This is the log10 probability against getting a match by random chance; values around 30 or more are recommended. This parameter is required to enable adapter clipping.
+p6_name=adapter.clip.palindrome.clip.threshold
+p6_optional=on
+p6_prefix_when_specified=--adapter.clip.palindrome.clip.threshold=
+p6_type=java.lang.Integer
+
+p7_default_value=
+p7_description=Specifies how accurate the match between any adapter etc. sequence must be against a read as a log10 probability against getting a match by random chance; values between 7-15 are recommended. This parameter is required to enable adapter clipping.
+p7_name=adapter.clip.simple.clip.threshold
+p7_optional=on
+p7_prefix_when_specified=--adapter.clip.simple.clip.threshold=
+p7_type=java.lang.Integer
+
+p8_default_value=
+p8_description=In addition to the alignment score, palindrome mode can verify that a minimum length of adapter has been detected. If unspecified, this defaults to 8 bases, for historical reasons. However, since palindrome mode has a very low false positive rate, this can be safely reduced, even down to 1, to allow shorter adapter fragments to be removed.
+p8_name=adapter.clip.min.length
+p8_optional=on
+p8_prefix_when_specified=--adapter.clip.min.length=
+p8_type=java.lang.Integer
+
+p9_default_value=true
+p9_description=Controls whether to keep both forward and reverse reads when trimming in palindrome mode. The reverse read is the same as the forward but in reverse complement and so carries no additional information. The default is "yes" (retain the reverse read) which is useful when downstream tools cannot handle a combination of paired and unpaired reads.
+p9_name=adapter.clip.keep.both.reads
+p9_optional=
+p9_prefix_when_specified=--adapter.clip.keep.both.reads=
+p9_type=java.lang.String
+p9_value=true\=yes;false\=no
+
+p10_default_value=
+p10_description=Remove low quality bases from the beginning. As long as a base has a value below this threshold the base is removed and the next base will be investigated.
+p10_name=trim.leading.quality.threshold
+p10_optional=on
+p10_prefix_when_specified=--trim.leading.quality.threshold=
+p10_type=java.lang.Integer
+
+p11_default_value=
+p11_description=Remove low quality bases from the end. As long as a base has a value below this threshold the base is removed and the next trailing base will be investigated.
+p11_name=trim.trailing.quality.threshold
+p11_optional=on
+p11_prefix_when_specified=--trim.trailing.quality.threshold=
+p11_type=java.lang.Integer
+
+p12_default_value=
+p12_description=Performs a Max Info adaptive quality trim, balancing the benefits of retaining longer reads against the costs of retaining bases with errors. This parameter specifies the read length which is likely to allow the location of the read within the target sequence to be determined.
+p12_name=max.info.target.length
+p12_optional=on
+p12_prefix_when_specified=--max.info.target.length=
+p12_type=java.lang.Integer
+
+p13_default_value=
+p13_description=This value, which should be set between 0 and 1, specifies the balance between preserving as much read length as possible vs. removal of incorrect bases. A low value of this parameter (<0.2) favors longer reads, while a high value (>0.8) favors read correctness.  Both max.info.target.length and max.info.strictness are required for the Max Info quality trim.
+p13_name=max.info.strictness
+p13_optional=on
+p13_prefix_when_specified=--max.info.strictness=
+p13_type=java.lang.Integer
+
+p14_default_value=
+p14_description=Perform a sliding window trimming, cutting once the average quality within the window falls below a threshold. By considering multiple bases, a single poor quality base will not cause the removal of high quality data later in the read.  This parameter specifies the number of bases to average across.
+p14_name=sliding.window.size
+p14_optional=on
+p14_prefix_when_specified=--sliding.window.size=
+p14_type=java.lang.Integer
+
+p15_default_value=
+p15_description=Specifies the average quality required for the sliding window trimming. Both sliding.window.size and sliding.window.quality.threshold are required to enable the sliding window trimming.
+p15_name=sliding.window.quality.threshold
+p15_optional=on
+p15_prefix_when_specified=--sliding.window.quality.threshold=
+p15_type=java.lang.Integer
+
+p16_default_value=
+p16_description=Remove reads that fall below the specified minimal length.
+p16_name=min.read.length
+p16_optional=on
+p16_prefix_when_specified=--min.read.length=
+p16_type=java.lang.Integer
+
+p17_default_value=
+p17_description=Extra steps to be performed after any other processing. These must be specified in exactly the format described in the Trimmomatic manual; see the documentation for details.  This is recommended for advanced users only.
+p17_name=extra.steps
+p17_optional=on
+p17_prefix_when_specified=--extra.steps=
+p17_type=java.lang.String
+
+p18_default_value=phred33
+p18_description=Allows you to specify the phred quality encoding.  The default is phred33, which matches modern Illumina pipelines.
+p18_fileFormat=
+p18_name=phred.encoding
+p18_optional=
+p18_prefix_when_specified=
+p18_type=java.lang.String
+p18_value=phred33;phred64
+
+p19_default_value=
+p19_description=Convert phred scores into a particular encoding.  Leave this blank for no conversion.
+p19_fileFormat=
+p19_name=convert.phred.scores
+p19_optional=on
+p19_prefix_when_specified=--convert.phred.scores=
+p19_type=java.lang.String
+p19_value=;to_phred33\=To phred33;to_phred64\=To phred64
+
+p20_default_value=false
+p20_description=Create a log of the trimming process.  This gives details on what operations were performed, etc. but can be quite lengthy.
+p20_fileFormat=
+p20_name=create.trimlog
+p20_optional=
+p20_prefix_when_specified=
+p20_type=java.lang.String
+p20_value=true\=yes;false\=no
+
+requiredPatchLSIDs=
+requiredPatchURLs=

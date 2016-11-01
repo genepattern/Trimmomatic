@@ -1,0 +1,23 @@
+#
+# Invalid input test: test handling of partial FASTQ file.  This was discovered via a GenomeSpace file that was truncated mid-transfer.
+#
+module: Trimmomatic
+params: 
+    input.file.1: "invalid/trunc_1.fastq"
+    input.file.2: "invalid/trunc_2.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    max.info.target.length: "3"
+    max.info.strictness: "0.5"
+    trim.leading.quality.threshold: "3"
+    trim.trailing.quality.threshold: "3"
+    min.read.length: "36"
+assertions:
+    jobStatus: fail
+    files:
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTracesAndSkip.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_invalid/partial_fastq_test/stdout.txt
+        "stderr.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_invalid/partial_fastq_test/stderr.txt
+            

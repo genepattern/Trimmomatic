@@ -1,0 +1,26 @@
+#
+# Mock test: Testing uncompressed PE input files with "fastq" extension
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsPE_1.fastq"
+    input.file.2: "mock/mock_readsPE_2.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    # Must have at least one operation in order to avoid Exception in building cmdline.log
+    convert.phred.scores: "to_phred33"
+assertions:
+    files:
+        "mock_readsPE_1P.fastq":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fastq_test/mock_readsPE_1P.fastq
+        "mock_readsPE_1U.fastq":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fastq_test/mock_readsPE_1U.fastq
+        "mock_readsPE_2P.fastq":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fastq_test/mock_readsPE_2P.fastq
+        "mock_readsPE_2U.fastq":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fastq_test/mock_readsPE_2U.fastq
+        "cmdline.log":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fastq_test/cmdline.log
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTracesAndSkip.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fastq_test/stdout.txt

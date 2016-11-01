@@ -1,0 +1,18 @@
+#
+# Mock test: Testing min.read.length param: 36 (valid)
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    min.read.length: "36"
+assertions:
+    files:
+        "mock_readsSE_trimmed.fastq":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/min_read_length_valid_test/mock_readsSE_trimmed.fastq
+        "cmdline.log":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/min_read_length_valid_test/cmdline.log
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTracesAndSkip.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/min_read_length_valid_test/stdout.txt

@@ -1,0 +1,26 @@
+#
+# Mock test: Testing bz2-compressed PE input files with "fq" extension
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsPE_1.fq.bz2"
+    input.file.2: "mock/mock_readsPE_2.fq.bz2"
+    output.filename.base: "<input.file.1_basename>"
+    # Must have at least one operation in order to avoid Exception in building cmdline.log
+    convert.phred.scores: "to_phred33"
+assertions:
+    files:
+        "mock_readsPE_1P.fq.gz":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fq_bz2_test/mock_readsPE_1P.fq.gz
+        "mock_readsPE_1U.fq.gz":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fq_bz2_test/mock_readsPE_1U.fq.gz
+        "mock_readsPE_2P.fq.gz":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fq_bz2_test/mock_readsPE_2P.fq.gz
+        "mock_readsPE_2U.fq.gz":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fq_bz2_test/mock_readsPE_2U.fq.gz
+        "cmdline.log":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fq_bz2_test/cmdline.log
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTracesAndSkip.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/pe_fq_bz2_test/stdout.txt

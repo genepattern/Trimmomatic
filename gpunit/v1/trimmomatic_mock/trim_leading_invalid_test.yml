@@ -1,0 +1,14 @@
+#
+# Mock test: Testing trim.leading.quality.threshold param: invalid
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    trim.leading.quality.threshold: "invalid"
+assertions:
+    jobStatus: fail
+    files:
+        "stderr.txt":
+            diffCmd: ../diffFirstLineOnly.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/trim_leading_invalid_test/stderr.txt

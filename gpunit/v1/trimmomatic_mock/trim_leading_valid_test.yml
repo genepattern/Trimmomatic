@@ -1,0 +1,18 @@
+#
+# Mock test: Testing trim.leading.quality.threshold param: 3 (valid)
+#
+module: Trimmomatic
+params: 
+    input.file.1: "mock/mock_readsSE.fastq"
+    output.filename.base: "<input.file.1_basename>"
+    trim.leading.quality.threshold: "3"
+assertions:
+    files:
+        "mock_readsSE_trimmed.fastq":
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/trim_leading_valid_test/mock_readsSE_trimmed.fastq
+        "cmdline.log":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/trim_leading_valid_test/cmdline.log
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTracesAndSkip.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/Trimmomatic/v1/output/trimmomatic_mock/trim_leading_valid_test/stdout.txt

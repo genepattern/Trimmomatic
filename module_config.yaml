@@ -1,0 +1,5 @@
+# Module-specific configuration properties.  Add these parameters to your server's 
+# YAML configuration file if appropriate.
+
+# CPU slot specification for LSF-backed servers 
+lsf.extra.bsub.args: ["-n", "4"]
