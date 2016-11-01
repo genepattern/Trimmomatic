@@ -6,7 +6,7 @@
     <import file="${dirOffset}/commontargets.xml"/>
 
     <target name="_init" depends="init">
-        <property name="appfile" value="Preprocess.jar"/>
+        <property name="appfile" value="trimmomatic-0.32.jar"/>
         <property  name="inclds" value="edu/"/>
         <path id="library.classpath">
             <fileset id="jar.lib" dir="lib" includes="*.jar">
@@ -39,7 +39,6 @@
         <antcall target="prezip" />
         <zip destfile="${dest.dir}/${ant.project.name}.zip" whenempty="fail" defaultexcludes="true">
             <fileset dir="." includes="*.html, manifest, paramgroups.json" />
-            <fileset dir="dist" includes="*.jar" />
             <fileset refid="jar.files" />
         </zip>
         <antcall target="postzip" />
