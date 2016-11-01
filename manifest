@@ -9,7 +9,7 @@ quality=pre-production
 os=any
 privacy=public
 description=Provides a variety of options for trimming Illumina FASTQ files of adapter sequences and low-quality reads.
-version=
+version= updated convert phred scores value to preserve no convert option in pipelines
 minGenePatternVersion=
 author=Anthony Bolger et al, Usadel Lab, Rheinsch - Westfalische Technische Hochschule Aachen 
 
@@ -163,7 +163,7 @@ p19_name=convert.phred.scores
 p19_optional=on
 p19_prefix_when_specified=--convert.phred.scores=
 p19_type=java.lang.String
-p19_value\= ;to_phred33\=To phred33;to_phred64\=To phred64
+p19_value=\=no conversion;to_phred33\=To phred33;to_phred64\=To phred64
 
 p20_default_value=false
 p20_description=Create a log of the trimming process.  This gives details on what operations were performed, etc. but can be quite lengthy.
