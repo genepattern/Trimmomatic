@@ -7,7 +7,7 @@
 
     <target name="_init" depends="init">
         <property name="appfile" value="trimmomatic-0.32.jar"/>
-        <property  name="inclds" value="edu/"/>
+        <property  name="inclds" value="org/"/>
         <path id="library.classpath">
             <fileset id="jar.lib" dir="lib" includes="*.jar">
             </fileset>
@@ -39,7 +39,7 @@
         <antcall target="prezip" />
         <zip destfile="${dest.dir}/${ant.project.name}.zip" whenempty="fail" defaultexcludes="true">
             <fileset dir="." includes="*.html, manifest, paramgroups.json" />
-            <fileset refid="jar.files" />
+            <fileset refid="jar.lib" />
         </zip>
         <antcall target="postzip" />
     </target>
