@@ -33,7 +33,8 @@
     </target>
 
     <target name="compile" depends="_init">
-        <javac debug="true" defaultexcludes="true" deprecation="true" destdir="." includes="${inclds}" optimize="false" proceed="false" srcdir="src">
+         <mkdir dir="classes" />
+        <javac debug="true" defaultexcludes="true" deprecation="true" destdir="classes" includes="${inclds}" optimize="false" proceed="false" srcdir="src">
             <classpath refid="library.classpath"/>
         </javac>
     </target>
