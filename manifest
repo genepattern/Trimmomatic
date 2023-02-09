@@ -5,11 +5,11 @@ taskDoc=doc.html
 fileFormat=fq;fastq
 taskType=RNA-seq
 categories=RNA-seq;Preprocess & Utilities
-quality=preproduction
+quality=production
 os=any
 privacy=public
 description=Provides a variety of options for trimming Illumina FASTQ files of adapter sequences and low-quality reads.
-version= updated convert phred scores value to preserve no convert option in pipelines
+version=Replaced gpftp with datasets
 minGenePatternVersion=
 author=Anthony Bolger et al, Usadel Lab, Rheinsch - Westfalische Technische Hochschule Aachen 
 
@@ -44,7 +44,7 @@ p3_type=java.lang.String
 
 p4_MODE=IN
 p4_TYPE=FILE
-p4_choiceDir=ftp\://gpftp.broadinstitute.org/module_support_files/Trimmomatic_0.32/adapters
+p4_choiceDir=https://datasets.genepattern.org/gpftp/module_support_files/Trimmomatic_0.32/index_directory.json
 p4_choiceDirFilter=*.fa;*.fasta;*.FA;*.FASTA
 p4_default_value=
 p4_description=A FASTA file containing the adapter sequences, PCR sequences, etc. to be clipped. This parameter is required to enable adapter clipping. Files are provided for several Illumina pipelines but you can also provide your own; see the documentation for details. Be sure to choose a PE file for paired-end data and an SE file for single-end data.

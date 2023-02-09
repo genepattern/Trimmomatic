@@ -5,7 +5,7 @@ module: Trimmomatic
 params: 
     input.file.1: "mock/mock_readsSE.fastq"
     output.filename.base: "<input.file.1_basename>"
-    adapter.clip.sequence.file: "ftp://gpftp.broadinstitute.org/module_support_files/Trimmomatic_0.32/adapters/TruSeq3-SE.fa"
+    adapter.clip.sequence.file: "https://datasets.genepattern.org/gpftp/module_support_files/Trimmomatic_0.32/adapters/TruSeq3-SE.fa"
     adapter.clip.seed.mismatches: "2"
     adapter.clip.palindrome.clip.threshold: "invalid"
     adapter.clip.simple.clip.threshold: "10"
